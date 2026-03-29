@@ -1,0 +1,62 @@
+Project Overview: NO₂ Pollution Map Viewer
+This is a proof-of-concept Streamlit web application that visualizes near-real-time tropospheric NO₂ (nitrogen dioxide) concentration over user-defined polygons using live satellite data from Google Earth Engine (GEE) and Sentinel-5P TROPOMI. The app fetches, processes, and overlays NO₂ heatmap tiles on an interactive map, computes statistics, and optionally shows a 7-day trend. It supports light/dark themes, polygon drawing/uploading, and graceful error handling.
+
+Key Features
+Live GEE data integration with fallback logic (OFFL to NRTI datasets).
+Interactive map with Folium/Geemap, including draw tools and basemaps.
+Statistics computation (mean, min, max, coverage) via GEE reducers.
+Caching for performance (TTL 2h).
+Responsive UI with custom CSS themes.
+External Tools and APIs Required
+The project relies on several external libraries, services, and APIs for data access, mapping, and visualization. Below is a complete list based on the codebase in app.py, requirements.txt, and README.md:
+
+Google Earth Engine (GEE) API:
+
+Purpose: Core data source for Sentinel-5P NO₂ imagery. Handles dataset filtering, masking, visualization, and statistics computation.
+Datasets Used:
+Primary: COPERNICUS/S5P/OFFL/L3_NO2 (offline, high-accuracy data).
+Fallback: COPERNICUS/S5P/NRTI/L3_NO2 (near-real-time data).
+Authentication: Requires a GEE account and credentials. The app uses a service account via biopulse-486310-f58108b6b328.json (key file for synapse-earth@biopulse-486310.iam.gserviceaccount.com). Alternatively, user authentication via earthengine authenticate or environment variables.
+Setup: Install earthengine-api (version ≥0.1.390). Initialize with ee.Initialize() in app.py (see init_gee() function).
+Quota/Usage: Subject to GEE usage limits; may require rate limiting or project setup.
+Streamlit:
+
+Purpose: Framework for building the interactive web app UI, including inputs, maps, and outputs.
+Version: ≥1.32.0.
+Integration: Handles session state, caching, and rendering. Custom CSS is injected for themes.
+Geemap:
+
+Purpose: Simplifies GEE integration with Folium for map creation, tile layers, and draw controls.
+Version: ≥0.29.0.
+Usage: Creates the base map in app.py (e.g., geemap.Map()), adds basemaps, and exports drawings.
+Folium:
+
+Purpose: Provides interactive Leaflet-based maps for visualization.
+Version: ≥0.16.0.
+Integration: Used for tile layers (NO₂ overlay), GeoJSON rendering, and controls. Falls back to basic Folium if Geemap is unavailable.
+Streamlit-Folium:
+
+Purpose: Bridges Streamlit and Folium for embedding maps in the app.
+Version: ≥0.20.0.
+Usage: Renders the map with folium_static() in app.py.
+Pandas:
+
+Purpose: Data manipulation for the 7-day trend chart.
+Version: ≥2.0.0.
+Usage: Converts trend data to DataFrame for st.line_chart() in app.py.
+Sentinel-5P TROPOMI Data (via GEE):
+
+Purpose: Satellite imagery source for NO₂ measurements.
+Bands: tropospheric_NO2_column_number_density (OFFL) or NO2_column_number_density (NRTI).
+Resolution: ~3.5–7 km; temporal coverage from May 2018.
+QA Masking: Applied with thresholds (≥0.75 for OFFL, ≥0.5 for NRTI) to ensure data quality.
+Installation and Setup
+Install dependencies: pip install -r requirements.txt.
+Authenticate GEE: Use service account credentials or run earthengine authenticate.
+Run the app: streamlit run app.py.
+Polygon input: Supports GeoJSON upload (e.g., polygon.json) or drawing on the map.
+Limitations and Notes
+Max zoom level 15 (~200 m) due to Sentinel-5P resolution.
+POC tool only; not for regulatory use.
+Caching reduces API calls but may hit GEE limits on heavy usage.
+For full details, refer to README.md. If you need code modifications or further assistance, provide specific queries.
