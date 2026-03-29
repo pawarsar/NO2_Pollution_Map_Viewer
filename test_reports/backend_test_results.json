@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-03-29T12:25:45.960880",
+  "total_tests": 13,
+  "passed_tests": 12,
+  "success_rate": 0.9230769230769231,
+  "results": [
+    {
+      "test": "Login with valid credentials",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:34.545359"
+    },
+    {
+      "test": "Login with invalid credentials",
+      "success": true,
+      "details": "Status: 401",
+      "timestamp": "2026-03-29T12:25:34.649092"
+    },
+    {
+      "test": "Get current user info",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:34.750842"
+    },
+    {
+      "test": "Logout",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:34.887342"
+    },
+    {
+      "test": "Start analysis",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:35.043006"
+    },
+    {
+      "test": "Get analysis by ID",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:37.197073"
+    },
+    {
+      "test": "Get completed analysis",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:45.329986"
+    },
+    {
+      "test": "Analysis generated all required data",
+      "success": true,
+      "details": "Missing: []",
+      "timestamp": "2026-03-29T12:25:45.330623"
+    },
+    {
+      "test": "Get user analyses list",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-03-29T12:25:45.496160"
+    },
+    {
+      "test": "Access /auth/me without token",
+      "success": true,
+      "details": "Status: 401",
+      "timestamp": "2026-03-29T12:25:45.631502"
+    },
+    {
+      "test": "Start analysis without token",
+      "success": true,
+      "details": "Status: 401",
+      "timestamp": "2026-03-29T12:25:45.737048"
+    },
+    {
+      "test": "Start analysis with invalid polygon",
+      "success": false,
+      "details": "Status: 422 (Expected: 500) - Invalid polygon: missing coordinates",
+      "timestamp": "2026-03-29T12:25:45.852829"
+    },
+    {
+      "test": "Get non-existent analysis",
+      "success": true,
+      "details": "Status: 404",
+      "timestamp": "2026-03-29T12:25:45.960019"
+    }
+  ]
+}

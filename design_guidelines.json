@@ -1,0 +1,137 @@
+{
+  "project_name": "NO2 Pollution Map Viewer",
+  "theme_strategy": "Toggleable (Light & Dark Mode)",
+  "archetype": "Archetype 4: Swiss & High-Contrast",
+  "design_philosophy": "Objective, highly functional, and authoritative. Designed as a data-dense 'Control Room' for environmental analysts. Prioritizes legibility, data correlation, and precision over decorative elements.",
+  "colors": {
+    "description": "High-contrast structural grayscale paired with signal colors for data status.",
+    "light": {
+      "background": "#FAFAF9",
+      "surface": "#FFFFFF",
+      "border": "#E7E5E4",
+      "text_primary": "#0C0A09",
+      "text_secondary": "#57534E",
+      "primary": "#002FA7",
+      "primary_foreground": "#FFFFFF",
+      "chart_grid": "#E7E5E4",
+      "glass_surface": "rgba(255, 255, 255, 0.7)",
+      "glass_border": "rgba(255, 255, 255, 0.4)"
+    },
+    "dark": {
+      "background": "#09090B",
+      "surface": "#18181B",
+      "border": "#27272A",
+      "text_primary": "#FAFAFA",
+      "text_secondary": "#A1A1AA",
+      "primary": "#002FA7",
+      "primary_foreground": "#FFFFFF",
+      "chart_grid": "#27272A",
+      "glass_surface": "rgba(0, 0, 0, 0.6)",
+      "glass_border": "rgba(255, 255, 255, 0.1)"
+    },
+    "semantic": {
+      "pollution_low": "#10B981",
+      "pollution_medium": "#F59E0B",
+      "pollution_high": "#EF4444",
+      "pollution_critical": "#7F1D1D",
+      "agent_processing": "#002FA7",
+      "agent_complete": "#10B981"
+    }
+  },
+  "typography": {
+    "strategy": "Swiss Brutalist - Radical weight contrast (Black vs Light).",
+    "fonts": {
+      "headings": "Cabinet Grotesk",
+      "body": "IBM Plex Sans",
+      "mono": "IBM Plex Mono",
+      "installation": "Import from Google Fonts or Fontshare"
+    },
+    "scales": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black leading-none",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base font-normal leading-relaxed",
+      "labels": "text-xs font-semibold uppercase tracking-[0.2em]",
+      "data_values": "text-3xl sm:text-4xl font-mono tracking-tight"
+    }
+  },
+  "layout_and_spacing": {
+    "global": {
+      "padding_scale": "Generous spacing for report (p-8 to p-24), tight spacing for dashboard (p-4 to p-6).",
+      "border_radius": "Rounded-none to rounded-md max (max 8px). Sharp, technical feel."
+    },
+    "grid_strategy": {
+      "mode": "MODE B: THE CONTROL ROOM GRID",
+      "dashboard_layout": "grid-cols-1 md:grid-cols-4 gap-0 or gap-px (using border-collapse logic)",
+      "map_area": "col-span-1 md:col-span-3 row-span-2 h-[80vh] md:h-[calc(100vh-4rem)]",
+      "sidebar_area": "col-span-1 row-span-2 h-[80vh] md:h-[calc(100vh-4rem)] overflow-y-auto border-l border-border"
+    }
+  },
+  "surface_strategies": {
+    "login_hero": {
+      "style": "Full bleed image with bg-black/50 overlay (darker for contrast). Content is left-aligned, high contrast."
+    },
+    "dashboard_panels": {
+      "style": "GRID BORDERS (The 'Technical' Look). Flat backgrounds, 1px subtle borders (border-border), no rounded corners, exposing the skeletal grid."
+    },
+    "map_controls": {
+      "style": "GLASSMORPHISM (The 'Crystal' Variant). backdrop-blur-xl bg-white/70 (light) or bg-black/60 (dark), 1px delicate inner stroke, soft ambient shadow."
+    },
+    "agent_pipeline_active_step": {
+      "style": "THE 'TRACING BEAM'. Active state gets a bright left border (border-l-4 border-primary) and a subtle background tint (bg-primary/10) to indicate processing."
+    },
+    "report_cards": {
+      "style": "Flat, pure geometric rectangles. border border-border/50, p-6 or p-8, sharp corners."
+    }
+  },
+  "components_and_interactions": {
+    "buttons": {
+      "primary": "Sharp corners, bg-primary text-white, hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200. Focus: ring-2 ring-primary/50 ring-offset-2",
+      "secondary": "border border-border bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800"
+    },
+    "map": {
+      "library": "react-leaflet",
+      "features": "Interactive polygon drawing tool (leaflet-draw). Base maps should toggle between light/dark standard tiles (e.g., CartoDB Positron/DarkMatter) based on app theme."
+    },
+    "charts": {
+      "library": "recharts or shadcn/ui charts",
+      "styling": "Stroke width 2px. Grid lines must be subtle (stroke-border). Tooltips must use Glassmorphism style. NO gradients in lines, use solid high-contrast semantic colors."
+    },
+    "agent_status_list": {
+      "styling": "Vertical stepper/list. Staggered entrance animations. Use 'lucide-react' icons (e.g., Loader2 for processing, CheckCircle2 for done, Circle for pending). Active text should be high-contrast, inactive should be text-secondary."
+    },
+    "testing": {
+      "requirement": "All interactive elements, forms, and key metric displays MUST have data-testid attributes (e.g., data-testid='start-analysis-btn')."
+    }
+  },
+  "media": {
+    "images": [
+      {
+        "category": "login_background",
+        "url": "https://images.unsplash.com/photo-1574169208538-4f45163ade8d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwzfHxzYXRlbGxpdGUlMjBlYXJ0aCUyMHZpZXd8ZW58MHx8fHwxNzc0Nzg0MTgyfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Satellite capture of Earth, representing the GEE and Sentinel-5P TROPOMI data source. Use as a full-bleed background for the login page with a dark overlay."
+      },
+      {
+        "category": "report_header_bg",
+        "url": "https://images.pexels.com/photos/14511075/pexels-photo-14511075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Atmospheric view of smog city skyline. Use in the generated report header to establish emotional context of air pollution."
+      }
+    ],
+    "icons": {
+      "library": "lucide-react",
+      "usage_command": "npm install lucide-react or yarn add lucide-react"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the color palette and typography rules defined in this JSON.",
+    "Do not use generic fonts like Inter, Roboto, or Open Sans. Use Cabinet Grotesk for headings and IBM Plex Sans for body text.",
+    "Implement the 'Control Room' grid layout for the dashboard: Map takes 3 columns, Sidebar (Agent Pipeline) takes 1 column on desktop.",
+    "Apply Glassmorphism exactly as specified for map overlays/controls to ensure readability over the map.",
+    "Ensure the Agent Pipeline visually updates sequentially. Use the 'Tracing Beam' or highlighted border styling for the active agent.",
+    "Charts in the report page must use the semantic pollution colors (Low=Green, Med=Yellow, High=Red) where applicable.",
+    "Add 'data-testid' attributes to all major interactive elements for testing purposes.",
+    "Use the provided image URLs exclusively for media. Do not use placeholder services.",
+    "Implement a robust light/dark theme toggle that cascades down to the map tile layer as well."
+  ]
+}
